@@ -83,9 +83,9 @@ I configured the hyperparamters as follows. I set the batch size as 125 as this 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 1.00
+* validation set accuracy of 0.9619 
+* test set accuracy of 0.9537
 
 I began building the model following the LeNet architecture with the gradient descent optimizer. However, this failed to improve the accuracy beyond 70% even when increasing parameters such as dropouts and network depth. After switching to Adam Optimizer, the results were in high 90%. I maximized the accuracy by increasing the epoch size from 10 to 30.
 
