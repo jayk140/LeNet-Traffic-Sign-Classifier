@@ -19,9 +19,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
+[image1]: ./data-visualization/1.png "Visualization"
+[image2]: ./data-visualization/2.png "Grayscaling"
+[image3]: ./data-visualization/3.png "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
@@ -42,6 +42,10 @@ signs data set:
 * The number of unique classes/labels in the data set is 43
 
 #### 2. Include an exploratory visualization of the dataset.
+
+![alt text][image1]
+![alt text][image2]
+![alt text][image3]
 
 The exploratory visualiation of the dataset can be viewed in the notebook Traffic_Sign_Classifier.ipynb.
 
@@ -87,16 +91,28 @@ My final model results were:
 * validation set accuracy of 0.9619 
 * test set accuracy of 0.9537
 
-I began building the model following the LeNet architecture with the gradient descent optimizer. However, this failed to improve the accuracy beyond 70% even when increasing parameters such as dropouts and network depth. After switching to Adam Optimizer, the results were in high 90%. I maximized the accuracy by increasing the epoch size from 10 to 30.
+I chose the recommended LeNet architecture as it is the standard and performs well for classificaion of 32x32 pixels. I initially experimented with grayscaling the images, but I noticed the model has greater accuracy when I did not preprocess into grayscale. This is a perhaps unconventional feature of the training model. I figured for this classification problem, color may be an important feature in the model learning the traffic signs.
 
-Another perhaps unconventional feature was I did not grayscale the image. I figured for this classification problem, color may be an important feature in the model learning the traffic signs.
+I also began training the model with the gradient descent optimizer. However, this failed to improve the accuracy beyond 70% even when increasing parameters such as dropouts and network depth. After switching to Adam Optimizer, the results were in the low to mid 90%. 
+
+To achieve an accuracy in the high 90%, I began experimenting with the hyperparameters. I first tried regularization and added a dropout of 0.2 and noticed an improvement so I kept increasing it until 0.5, which seems to have the maximum optimal effect. Finally, I began including epoch size, beginning with 10 and noticing good results so I improved to 30. With these set of parameters, I achieved a validation set accuracy of 0.9619.
+
+The training set accuracy is higher than that of the validation set. There may be some overfitting. Some possible solutions to solve the overfitting problems may be: use data augmentation, increasing the data set, and add more L1/L2 regularization to make the model more robust.
  
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-The images of the five German traffic signs I chose can be found in the notebook. For the speed sign, the angle from the left bottom may make it difficult to classify. The roundabout was also tilted at a upward angle. The pedestrian and priority signs were at a straighforward angle, but the actual content of the sign was a little difficult to discern due to the small image sizes. Finally, the ahead sign was straightforward and clear, so it did not present any issues. 
+The images of the five German traffic signs I chose can be found in the notebook. 
+
+For the speed sign, the angle from the left bottom may make it difficult to classify. There is also a shandow on the upper right and there is green tress in the background that may skew the model. The image has good brightness. 
+
+The roundabout was also tilted at a upward angle. It has good brightness and is largely clear from any background noise besides a blue sky. The content is clear and there is no overt shadowing. 
+
+The pedestrian and priority signs were at a straighforward angle with adequate brightness, but the actual content of the sign was a little difficult to discern due to the small image sizes. Moreove, the pedestiran image has some overshadow from the blue background.   
+
+Finally, the ahead sign was straightforward and clear, so it did not present any issues. 
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
